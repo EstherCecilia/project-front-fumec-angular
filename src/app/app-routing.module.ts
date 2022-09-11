@@ -8,7 +8,11 @@ import { RegisterCourseComponent } from './screens/register-course/register-cour
 import { CustomerReportComponent } from './screens/customer-report/customer-report.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login', 
+    loadChildren: () => import('./screens/login/login.module')
+      .then(m => m.LoginModule),
+  },
   { path: 'signup', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'app/register', component: RegisterCourseComponent },
@@ -19,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,9 +1,9 @@
+import { LoginModule } from './screens/login/login.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './screens/login/login.component';
 import { RegisterComponent } from './screens/register/register.component';
 import { HomeComponent } from './screens/home/home.component';
 import { BaseComponent } from './components/base/base.component';
@@ -13,11 +13,11 @@ import { CustomerReportComponent } from './screens/customer-report/customer-repo
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RegisterComponent,
     BaseComponent,
     HomeComponent,
@@ -25,6 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CustomerReportComponent,
   ],
   imports: [
+    HttpClientModule,
+    LoginModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -35,4 +37,4 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
