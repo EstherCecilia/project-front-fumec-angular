@@ -8,15 +8,28 @@ import { RegisterCourseComponent } from './screens/register-course/register-cour
 import { CustomerReportComponent } from './screens/customer-report/customer-report.component';
 
 const routes: Routes = [
+  { path: 'signup', component: RegisterComponent },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'app',
+    children: [
+      {
+        path: 'register',
+        component: RegisterCourseComponent
+      },
+      {
+        path: 'report',
+        component: CustomerReportComponent
+      }
+    ]
+  },
   {
     path: 'login', 
     loadChildren: () => import('./screens/login/login.module')
       .then(m => m.LoginModule),
   },
-  { path: 'signup', component: RegisterComponent },
-  { path: '', component: HomeComponent },
-  { path: 'app/register', component: RegisterCourseComponent },
-  { path: 'app/report', component: CustomerReportComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
