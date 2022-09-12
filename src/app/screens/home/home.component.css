@@ -3,7 +3,7 @@ section{
     padding: 150px 50px;
     height: 100vh;
     justify-content: space-between;
-    background-image: url(https://jrmcoaching.com.br/wp-content/uploads/2022/02/Reuniao-empresarial.jpg);
+    background-image: url('../../../assets/images/background-home.jpeg');
     background-color: #cccccc;
     background-size: cover;
 }
