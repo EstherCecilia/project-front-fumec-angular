@@ -3,20 +3,21 @@
     <div class="base">
       <h1>ENTRAR</h1>
       <div class="input-base">
-        <label >Usuário</label>
+        <label>Usuário</label>
         <input formControlName="username" type="text" />
       </div>
 
       <div class="input-base">
-        <label >Senha</label>
+        <label>Senha</label>
         <input formControlName="password" type="text" />
       </div>
 
       <button (click)="login()">Entrar</button>
 
-    <div class="link"><span>Esqueci a senha</span></div>
-    <div [routerLink]="['/signup']" class="link">
-      <span>Cadastre-se</span>
+      <div class="link"><span>Esqueci a senha</span></div>
+      <div [routerLink]="['/signup']" class="link">
+        <span>Cadastre-se</span>
+      </div>
     </div>
-  </div>
+  </form>
 </section>
