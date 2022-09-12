@@ -10,7 +10,7 @@ import { CustomerReportComponent } from './screens/customer-report/customer-repo
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'app/register', component: RegisterCourseComponent },
   { path: 'app/report', component: CustomerReportComponent },
 ];
