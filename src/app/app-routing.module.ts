@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './screens/login/login.component';
 import { RegisterComponent } from './screens/register/register.component';
@@ -8,19 +8,34 @@ import { RegisterCourseComponent } from './screens/register-course/register-cour
 import { CustomerReportComponent } from './screens/customer-report/customer-report.component';
 
 const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'signup', component: RegisterComponent },
   {
-    path: 'login', 
+    path: 'app',
+    children: [
+      { path: 'register', component: RegisterCourseComponent },
+      { path: 'report', component: CustomerReportComponent }
+    ]
+  },
+  {
+    path: 'internal-app',
+    loadChildren: () => import('./screens/internal-app/internal-app.module').then(m => m.InternalAppModule)
+  },
+  {
+    path: 'login',
     loadChildren: () => import('./screens/login/login.module')
       .then(m => m.LoginModule),
   },
-  { path: 'signup', component: RegisterComponent },
-  { path: '', component: HomeComponent },
-  { path: 'app/register', component: RegisterCourseComponent },
-  { path: 'app/report', component: CustomerReportComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
+const config: ExtraOptions = {
+  useHash: false,
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
