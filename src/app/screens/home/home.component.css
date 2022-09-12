@@ -3,7 +3,8 @@ section{
     padding: 150px 50px;
     height: 100vh;
     justify-content: space-between;
-    background-image: url('../../../assets/images/background-home.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)), url('../../../assets/images/background-home.jpeg');
     background-color: #cccccc;
     background-size: cover;
 }
@@ -16,6 +17,18 @@ h1{
     font-size: 2.5rem;
 }
 
+#title{
+    line-height: 2.5rem;
+    max-width: 38rem;
+
+}
+
+.base > h1{
+    text-align: center;
+}
+
 .base{
     min-width: 200px;
+    max-width: 370px;
+    padding: 10px 30px 50px 30px;
 }
