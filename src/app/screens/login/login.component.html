@@ -1,17 +1,18 @@
 <section>
-  <div class="base">
-    <h1>ENTRAR</h1>
-    <div class="input-base">
-      <label for="">Usuário</label>
-      <input type="text" />
-    </div>
+  <form [formGroup]="loginForm">
+    <div class="base">
+      <h1>ENTRAR</h1>
+      <div class="input-base">
+        <label >Usuário</label>
+        <input formControlName="username" type="text" />
+      </div>
 
-    <div class="input-base">
-      <label for="">Senha</label>
-      <input type="text" />
-    </div>
+      <div class="input-base">
+        <label >Senha</label>
+        <input formControlName="password" type="text" />
+      </div>
 
-    <button>Entrar</button>
+      <button (click)="login()">Entrar</button>
 
     <div class="link"><span>Esqueci a senha</span></div>
     <div [routerLink]="['/signup']" class="link">
