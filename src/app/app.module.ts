@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     RegisterCourseComponent,
     CustomerReportComponent,
+    CoursesReportComponent,
   ],
   imports: [
     HttpClientModule,
