@@ -1,0 +1,18 @@
+<app-base></app-base>
+<section>
+  <h1>Realatórios</h1>
+  <p>ESCOLHA O RELATÓRIO DESEJADO</p>
+
+  <div class="reports">
+    <div [routerLink]="['/app/courses-report']">
+      <fa-icon [icon]="faGraduationCap" class="fa-icon"></fa-icon>
+      <span>Cursos</span>
+    </div>
+    <div [routerLink]="['/app/customer-report']">
+      <fa-icon [icon]="faUsers" class="fa-icon"></fa-icon>
+      <span>Clientes</span>
+    </div>
+  </div>
+
+  <app-social-networks></app-social-networks>
+</section>

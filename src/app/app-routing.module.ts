@@ -6,6 +6,8 @@ import { HomeComponent } from './screens/home/home.component';
 import { RegisterCourseComponent } from './screens/register-course/register-course.component';
 import { CustomerReportComponent } from './screens/customer-report/customer-report.component';
 import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
+import { ReportsComponent } from './screens/reports/reports.component';
+import { HomeAppComponent } from './screens/home-app/home-app.component';
 
 const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
@@ -14,8 +16,16 @@ const routes: Routes = [
     path: 'app',
     children: [
       {
+        path: 'home',
+        component: HomeAppComponent,
+      },
+      {
         path: 'register',
         component: RegisterCourseComponent,
+      },
+      {
+        path: 'report',
+        component: ReportsComponent,
       },
       {
         path: 'customer-report',

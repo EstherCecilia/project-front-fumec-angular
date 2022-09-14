@@ -21,10 +21,18 @@ section > table {
 }
 
 h1,
-span {
+p {
   color: #fff;
 }
 
 button {
   margin: 30px 0;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1rem;
 }

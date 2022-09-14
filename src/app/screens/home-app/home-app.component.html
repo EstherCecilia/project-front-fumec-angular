@@ -1,0 +1,28 @@
+<app-base></app-base>
+<section>
+  <h1>DESCUBRA</h1>
+  <p>CRIE INSIGHTS SOBRE SEU NEGÓCIO</p>
+
+  <div class="reports">
+    <div [routerLink]="['/app/report']">
+      <fa-icon [icon]="faPrint" class="fa-icon"></fa-icon>
+      <span>Relarórios</span>
+    </div>
+    <div>
+      <fa-icon [icon]="faChartLine" class="fa-icon"></fa-icon>
+      <span>Dashboards</span>
+    </div>
+  </div>
+  <div class="reports">
+    <div [routerLink]="['/app/register']">
+      <fa-icon [icon]="faCirclePlus" class="fa-icon"></fa-icon>
+      <span>Cadastro de curso</span>
+    </div>
+    <div [routerLink]="['/app/courses-report']">
+      <fa-icon [icon]="faChartLine" class="fa-icon"></fa-icon>
+      <span>Consulta de curso</span>
+    </div>
+  </div>
+
+  <app-social-networks></app-social-networks>
+</section>

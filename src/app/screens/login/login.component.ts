@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +10,33 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-  ) { }
+    private router: Router
+  ) {}
 
   loginForm = this.fb.group({
     username: '',
     password: '',
   });
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   login() {
-    console.log(this.loginForm.value)
-    this.http.post<any>('http://localhost:3000/auth/login', this.loginForm.value)
+    console.log(this.loginForm.value);
+    this.http
+      .post<any>('http://localhost:3000/auth/login', this.loginForm.value)
       .subscribe({
         next: (res) => {
           alert('Login realizado com sucesso!');
-          localStorage.setItem('token', res.access_token)
-        },
-        error: err => {
-          alert('Usuario ou senha incorretos.')
-        }
-      })
+          localStorage.setItem('token', res.access_token);
 
+          this.router.navigate(['/app/home']);
+        },
+        error: (err) => {
+          alert('Usuario ou senha incorretos.');
+        },
+      });
   }
 }

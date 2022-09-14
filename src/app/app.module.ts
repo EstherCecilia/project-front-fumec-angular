@@ -1,6 +1,7 @@
 import { LoginModule } from './screens/login/login.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
+import { ReportsComponent } from './screens/reports/reports.component';
+import { SocialNetworksComponent } from './components/social-networks/social-networks.component';
+import { HomeAppComponent } from './screens/home-app/home-app.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,9 @@ import { CoursesReportComponent } from './screens/courses-report/courses-report.
     RegisterCourseComponent,
     CustomerReportComponent,
     CoursesReportComponent,
+    ReportsComponent,
+    SocialNetworksComponent,
+    HomeAppComponent,
   ],
   imports: [
     HttpClientModule,
@@ -34,8 +41,9 @@ import { CoursesReportComponent } from './screens/courses-report/courses-report.
     MatTableModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
