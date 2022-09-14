@@ -1,24 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+type PagesPathname = {
+  [key: string]: string;
+};
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css'],
 })
 export class BaseComponent implements OnInit {
-  constructor(private router: Router) {}
+  active: string;
+  constructor(private router: Router) {
+    this.active = 'home';
+  }
+  ngOnInit(): void {
+    this.changeTabMenu();
+  }
 
-  ngOnInit(): void {}
+  pagesPathname: PagesPathname = {
+    '/app/home': 'home',
+    '/app/report': 'report',
+    '/app/register': 'register',
+    '/app/dashboard': 'dashboard',
+  };
+
+  changeTabMenu() {
+    const path = location.pathname;
+    this.active = this.pagesPathname[path];
+  }
 
   handleMenu() {
-    var x = document.getElementById('myTopnav');
+    const elementTopNav = document.getElementById('myTopnav');
 
-    if (!x) return;
-    if (x.className === 'topnav') {
-      x.className += ' responsive';
+    if (!elementTopNav) return;
+    if (elementTopNav.className === 'topnav') {
+      elementTopNav.className += ' responsive';
     } else {
-      x.className = 'topnav';
+      elementTopNav.className = 'topnav';
     }
   }
 

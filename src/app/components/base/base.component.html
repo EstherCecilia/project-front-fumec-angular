@@ -1,8 +1,18 @@
 <div class="topnav" id="myTopnav">
-  <a [routerLink]="['/app/home']" class="active">Home</a>
-  <a href="#dashboard">Dashboard</a>
-  <a [routerLink]="['/app/report']">Relatórios</a>
-  <a [routerLink]="['/app/register']">Cadastro</a>
+  <a [routerLink]="['/app/home']" [ngClass]="{ active: active === 'home' }"
+    >Home</a
+  >
+  <a href="#dashboard" [ngClass]="{ active: active === 'dashboard' }"
+    >Dashboard</a
+  >
+  <a [routerLink]="['/app/report']" [ngClass]="{ active: active === 'report' }"
+    >Relatórios</a
+  >
+  <a
+    [routerLink]="['/app/register']"
+    [ngClass]="{ active: active === 'register' }"
+    >Cadastro</a
+  >
   <a (click)="logout()">Sair</a>
   <a href="javascript:void(0);" class="icon" (click)="handleMenu()">
     <i class="fa fa-bars"></i>
