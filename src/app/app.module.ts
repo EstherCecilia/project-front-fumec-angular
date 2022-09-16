@@ -14,11 +14,12 @@ import { CustomerReportComponent } from './screens/customer-report/customer-repo
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
 import { ReportsComponent } from './screens/reports/reports.component';
 import { SocialNetworksComponent } from './components/social-networks/social-networks.component';
 import { HomeAppComponent } from './screens/home-app/home-app.component';
+import { HttpInterceptorService } from './provider/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { HomeAppComponent } from './screens/home-app/home-app.component';
     BrowserAnimationsModule,
     FontAwesomeModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
