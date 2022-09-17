@@ -8,12 +8,14 @@ import { CustomerReportComponent } from './screens/customer-report/customer-repo
 import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
 import { ReportsComponent } from './screens/reports/reports.component';
 import { HomeAppComponent } from './screens/home-app/home-app.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   {
     path: 'app',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
