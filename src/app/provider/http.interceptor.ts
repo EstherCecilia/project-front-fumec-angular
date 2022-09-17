@@ -3,15 +3,17 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) { }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const BASE_URL = environment.base_url;
@@ -23,6 +25,17 @@ export class HttpInterceptorService implements HttpInterceptor {
       }
     })
 
-    return next.handle(apiReq);
+    return next.handle(apiReq)
+      .pipe(tap({
+        error: (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status !== 401) {
+              return;
+            }
+            localStorage.removeItem('token')
+            this.router.navigate(['/login']);
+          }
+        }
+      }))
   }
 }
