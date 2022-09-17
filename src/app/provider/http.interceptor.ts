@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -13,7 +14,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const BASE_URL: string = 'http://54.243.29.48:8080'
+    const BASE_URL = environment.base_url;
     var token = localStorage.getItem('token');
     const apiReq = req.clone({
       url: `${BASE_URL}/${req.url}`,
