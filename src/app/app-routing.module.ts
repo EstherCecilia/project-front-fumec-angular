@@ -1,39 +1,56 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegisterComponent } from './screens/register/register.component';
-import { HomeComponent } from './screens/home/home.component';
-import { RegisterCourseComponent } from './screens/register-course/register-course.component';
-import { CustomerReportComponent } from './screens/customer-report/customer-report.component';
-import { CoursesReportComponent } from './screens/courses-report/courses-report.component';
-import { ReportsComponent } from './screens/reports/reports.component';
-import { HomeAppComponent } from './screens/home-app/home-app.component';
-
 const routes: Routes = [
-  { path: 'signup', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./screens/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./screens/home/home.module').then((m) => m.HomeModule),
+  },
   {
     path: 'app',
     children: [
       {
         path: 'home',
-        component: HomeAppComponent,
+        loadChildren: () =>
+          import('./screens/home-app/home-app.module').then(
+            (m) => m.HomeAppModule
+          ),
       },
       {
         path: 'register',
-        component: RegisterCourseComponent,
+        loadChildren: () =>
+          import('./screens/register-course/register-course.module').then(
+            (m) => m.RegisterCourseModule
+          ),
       },
       {
         path: 'report',
-        component: ReportsComponent,
+        loadChildren: () =>
+          import('./screens/reports/reports.module').then(
+            (m) => m.ReportsModule
+          ),
       },
       {
         path: 'customer-report',
-        component: CustomerReportComponent,
+        loadChildren: () =>
+          import('./screens/customer-report/customer-report.module').then(
+            (m) => m.CustomerReportModule
+          ),
       },
       {
         path: 'courses-report',
-        component: CoursesReportComponent,
+        loadChildren: () =>
+          import('./screens/courses-report/courses-report.module').then(
+            (m) => m.CoursesReportModule
+          ),
       },
     ],
   },

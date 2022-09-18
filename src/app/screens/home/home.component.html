@@ -32,6 +32,15 @@
         <input type="text" />
       </div>
 
+      <div class="input-base">
+        <label for="">Cursos</label>
+        <select name="courses" id="courses">
+          <option *ngFor="let course of courses" [value]="course.value">
+            {{ course.label }}
+          </option>
+        </select>
+      </div>
+
       <button>Enviar</button>
     </div>
   </div>

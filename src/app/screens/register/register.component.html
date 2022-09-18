@@ -1,38 +1,39 @@
 <section>
-  <div class="base">
-    <h1>Cadastre-se</h1>
-    <div class="input-base">
-      <label for="">Nome</label>
-      <input type="text" />
-    </div>
+  <form [formGroup]="registerForm">
+    <div class="base">
+      <h1>Cadastre-se</h1>
+      <div class="input-base">
+        <label for="">Nome</label>
+        <input formControlName="name" type="text" />
+      </div>
 
-    <div class="input-base">
-      <label for="">E-mail</label>
-      <input type="text" />
-    </div>
-    <div class="input-base">
-      <label for="">Senha</label>
-      <input type="text" />
-    </div>
-    <div class="input-base">
-      <label for="">Confirmação de senha</label>
-      <input type="text" />
-    </div>
+      <div class="input-base">
+        <label for="">E-mail</label>
+        <input formControlName="email" type="email" />
+      </div>
+      <div class="input-base">
+        <label for="">Senha</label>
+        <input formControlName="password" type="password" />
+      </div>
+      <div class="input-base">
+        <label for="">Confirmação de senha</label>
+        <input formControlName="password_corfirm" type="password" />
+      </div>
 
-    <div class="input-base">
-      <label for="">Cargo</label>
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-    </div>
+      <div class="input-base">
+        <label for="">Cargo</label>
+        <select name="positions" id="positions">
+          <option *ngFor="let position of positions" [value]="position.value">
+            {{ position.label }}
+          </option>
+        </select>
+      </div>
 
-    <button>Cadastrar</button>
+      <button (click)="register()">Cadastrar</button>
 
-    <div [routerLink]="['/login']" class="link">
-      <span>Já tenho cadastro</span>
+      <div [routerLink]="['/login']" class="link">
+        <span>Já tenho cadastro</span>
+      </div>
     </div>
-  </div>
+  </form>
 </section>

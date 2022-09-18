@@ -1,41 +1,43 @@
 <app-base></app-base>
 <section>
-  <div class="base">
-    <h1>Cadastre o curso</h1>
-    <div class="group-input">
-      <div class="input-base">
-        <label for="">Nome do curso</label>
-        <input type="text" />
+  <form [formGroup]="registerForm">
+    <div class="base">
+      <h1>Cadastre o curso</h1>
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Nome do curso</label>
+          <input formControlName="name" type="text" />
+        </div>
+        <div class="input-base">
+          <label for="">Professor</label>
+          <input formControlName="teacher" type="text" />
+        </div>
       </div>
-      <div class="input-base">
-        <label for="">Professor</label>
-        <input type="text" />
-      </div>
-    </div>
 
-    <div class="group-input">
-      <div class="input-base">
-        <label for="">Duração do curso</label>
-        <input type="text" />
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Duração do curso</label>
+          <input formControlName="duration" type="text" />
+        </div>
+        <div class="input-base">
+          <label for="">Turno do curso</label>
+          <input formControlName="shift" type="text" />
+        </div>
       </div>
-      <div class="input-base">
-        <label for="">Turno do curso</label>
-        <input type="text" />
+
+      <div class="input-base" id="area">
+        <label for="">Descrição do curso</label>
+        <textarea formControlName="description" rows="4" cols="50"></textarea>
       </div>
-    </div>
 
-    <div class="input-base" id="area">
-      <label for="">Descrição do curso</label>
-      <textarea rows="4" cols="50"></textarea>
-    </div>
-
-    <div class="group-input">
-      <div class="input-base">
-        <label for="">Preço do curso</label>
-        <input type="text" />
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Preço do curso</label>
+          <input formControlName="price" type="text" />
+        </div>
       </div>
-    </div>
 
-    <button>Cadastrar</button>
-  </div>
+      <button (click)="register()">Cadastrar</button>
+    </div>
+  </form>
 </section>
