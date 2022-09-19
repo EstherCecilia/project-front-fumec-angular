@@ -1,1 +1,1 @@
-web: ng serve
+web: npx ng serve
