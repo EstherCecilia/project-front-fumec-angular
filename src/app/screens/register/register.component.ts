@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 type Position = {
@@ -26,15 +26,38 @@ export class RegisterComponent implements OnInit {
   ];
 
   registerForm = this.fb.group({
-    name: '',
-    email: '',
-    password: '',
+    name: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
     password_corfirm: '',
   });
 
   ngOnInit(): void {}
 
   register() {
-    console.log(this.registerForm.value);
+    if (
+      this.registerForm.value.password !==
+      this.registerForm.value.password_corfirm
+    ) {
+      alert('As senhas não conferem');
+      return;
+    }
+
+    if (this.registerForm.valid) {
+      this.http
+        .post<any>('rota-de-criacao', this.registerForm.value)
+        .subscribe({
+          next: (res) => {
+            alert('Cadastro realizado com sucesso!');
+
+            this.router.navigate(['/login']);
+          },
+          error: (err) => {
+            alert(err?.message);
+          },
+        });
+    } else {
+      alert('Preencha os campos corretamente');
+    }
   }
 }

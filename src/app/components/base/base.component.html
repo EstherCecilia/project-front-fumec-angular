@@ -2,7 +2,9 @@
   <a [routerLink]="['/app/home']" [ngClass]="{ active: active === 'home' }"
     >Home</a
   >
-  <a href="#dashboard" [ngClass]="{ active: active === 'dashboard' }"
+  <a
+    [routerLink]="['/app/dashboard']"
+    [ngClass]="{ active: active === 'dashboard' }"
     >Dashboard</a
   >
   <a [routerLink]="['/app/report']" [ngClass]="{ active: active === 'report' }"

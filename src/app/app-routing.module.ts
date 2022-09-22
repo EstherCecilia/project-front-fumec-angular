@@ -27,6 +27,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./screens/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
         path: 'register',
         loadChildren: () =>
           import('./screens/register-course/register-course.module').then(

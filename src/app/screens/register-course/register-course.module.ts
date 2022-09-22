@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RegisterCourseComponent } from './register-course.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
