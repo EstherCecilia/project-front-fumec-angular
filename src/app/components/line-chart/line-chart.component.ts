@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto';
+import * as echarts from 'echarts';
 
 @Component({
   selector: 'app-line-chart',
@@ -7,31 +7,29 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit {
-  public chart: any;
-
   constructor() {}
 
-  createChart() {
-    this.chart = new Chart('line-chart', {
-      type: 'line',
-      data: {
-        labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
-        datasets: [
-          {
-            data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-            label: 'Africa',
-            borderColor: '#3e95cd',
-            fill: false,
-          },
-        ],
+  option = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line',
       },
-      // options: {
-      //   title: {
-      //     display: true,
-      //     text: 'World population per region (in millions)',
-      //   },
-      // },
-    });
+    ],
+  };
+
+  createChart() {
+    const chartDom = document.getElementById('main-line');
+    if (!chartDom) return;
+    const myChart = echarts.init(chartDom);
+    myChart.setOption(this.option);
   }
 
   ngOnInit(): void {

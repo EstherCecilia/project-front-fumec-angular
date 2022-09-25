@@ -22,11 +22,20 @@
 
       <div class="input-base">
         <label for="">Cargo</label>
-        <select name="positions" id="positions">
-          <option *ngFor="let position of positions" [value]="position.value">
-            {{ position.label }}
-          </option>
-        </select>
+        <input
+          type="text"
+          placeholder=""
+          [formControl]="control"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let position of filteredPositions | async"
+            [value]="position"
+          >
+            {{ position }}
+          </mat-option>
+        </mat-autocomplete>
       </div>
 
       <button (click)="register()">Cadastrar</button>

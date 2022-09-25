@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [RegisterComponent],
   providers: [],
   imports: [
     CommonModule,
+    MatAutocompleteModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

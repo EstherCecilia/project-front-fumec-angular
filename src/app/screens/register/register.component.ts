@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map, Observable, startWith } from 'rxjs';
 
 type Position = {
   label: string;
@@ -13,12 +14,13 @@ type Position = {
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  filteredPositions!: Observable<string[]>;
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
     private router: Router
   ) {}
-
+  control = new FormControl('');
   positions: Position[] = [
     { label: 'Gerente', value: 'manager' },
     { label: 'Atendente', value: 'attendant' },
@@ -32,7 +34,22 @@ export class RegisterComponent implements OnInit {
     password_corfirm: '',
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredPositions = this.control.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    return this.positions
+      .filter(({ label }) => this._normalizeValue(label).includes(filterValue))
+      .map((item) => item.label);
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
 
   register() {
     if (

@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 type Course = {
   label: string;
-  value: string;
+  id: number;
 };
 @Component({
   selector: 'app-home',
@@ -13,15 +15,14 @@ type Course = {
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  filteredCourses!: Observable<string[]>;
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
     private router: Router
   ) {}
-
-  courses: Course[] = [
-    { label: 'Ciências da computação', value: 'computer science' },
-  ];
+  control = new FormControl('');
+  courses: Course[] = [];
 
   registerForm = this.fb.group({
     name: ['', Validators.required],
@@ -30,15 +31,52 @@ export class HomeComponent implements OnInit {
     zipCode: ['', Validators.required],
   });
 
-  ngOnInit(): void {}
+  getCourses() {
+    this.http.get<any>('course').subscribe({
+      next: (res) => {
+        this.courses = res.map((course: { id: number; name: string }) => ({
+          id: course.id,
+          label: course.name,
+        }));
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    this.getCourses();
+    this.filteredCourses = this.control.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    return this.courses
+      .filter(({ label }) => this._normalizeValue(label).includes(filterValue))
+      .map((item) => item.label);
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
 
   register() {
-    if (this.registerForm.valid) {
-      this.http.post<any>('leads', this.registerForm.value).subscribe({
+    if (this.registerForm.valid && this.control.value) {
+      const courseId = this.courses.find(
+        (course) => course.label === this.control.value
+      )?.id;
+
+      const payload = {
+        ...this.registerForm.value,
+        courseId,
+      };
+
+      this.http.post<any>('leads', payload).subscribe({
         next: (res) => {
           alert('Cadastro realizado com sucesso!');
 
-          this.router.navigate(['/home']);
+          this.registerForm.reset();
+          this.control.reset();
         },
         error: (err) => {
           alert(err?.message);

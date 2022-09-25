@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto';
+import * as echarts from 'echarts';
 
 @Component({
   selector: 'app-radar-chart',
@@ -7,30 +7,66 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./radar-chart.component.css'],
 })
 export class RadarChartComponent implements OnInit {
-  public chart: any;
-
   constructor() {}
 
-  createChart() {
-    this.chart = new Chart('radar-chart', {
-      type: 'doughnut',
-      data: {
-        labels: ['Africa', 'Asia', 'Europe', 'Latin America', 'North America'],
-        datasets: [
+  option = {
+    series: [
+      {
+        type: 'gauge',
+        progress: {
+          show: true,
+          width: 18,
+        },
+        axisLine: {
+          lineStyle: {
+            width: 18,
+          },
+        },
+        axisTick: {
+          show: false,
+        },
+        splitLine: {
+          length: 15,
+          lineStyle: {
+            width: 2,
+            color: '#999',
+          },
+        },
+        axisLabel: {
+          distance: 25,
+          color: '#999',
+          fontSize: 20,
+        },
+        anchor: {
+          show: true,
+          showAbove: true,
+          size: 25,
+          itemStyle: {
+            borderWidth: 10,
+          },
+        },
+        title: {
+          show: false,
+        },
+        detail: {
+          valueAnimation: true,
+          fontSize: 80,
+          offsetCenter: [0, '70%'],
+        },
+        data: [
           {
-            label: 'Population (millions)',
-            backgroundColor: [
-              '#3e95cd',
-              '#8e5ea2',
-              '#3cba9f',
-              '#e8c3b9',
-              '#c45850',
-            ],
-            data: [2478, 5267, 734, 784, 433],
+            value: 70,
           },
         ],
       },
-    });
+    ],
+  };
+
+  createChart() {
+    const chartDom = document.getElementById('main-radar');
+    if (!chartDom) return;
+    const myChart = echarts.init(chartDom);
+    myChart.setOption(this.option);
   }
 
   ngOnInit(): void {
