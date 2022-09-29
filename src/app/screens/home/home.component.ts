@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-    private router: Router
+    private toastr: ToastrService
   ) {}
   control = new FormControl('');
   courses: Course[] = [];
@@ -73,17 +73,17 @@ export class HomeComponent implements OnInit {
 
       this.http.post<any>('leads', payload).subscribe({
         next: (res) => {
-          alert('Cadastro realizado com sucesso!');
+          this.toastr.success('Cadastro realizado com sucesso!');
 
           this.registerForm.reset();
           this.control.reset();
         },
         error: (err) => {
-          alert(err?.message);
+          this.toastr.error(err?.message);
         },
       });
     } else {
-      alert('Preencha os campos corretamente');
+      this.toastr.warning('Preencha os campos corretamente');
     }
   }
 }

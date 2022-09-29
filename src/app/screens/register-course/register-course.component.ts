@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-course',
@@ -12,7 +13,8 @@ export class RegisterCourseComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   registerForm = this.fb.group({
     name: ['', Validators.required],
@@ -29,16 +31,16 @@ export class RegisterCourseComponent implements OnInit {
     if (this.registerForm.valid) {
       this.http.post<any>('course', this.registerForm.value).subscribe({
         next: (res) => {
-          alert('Cadastro realizado com sucesso!');
+          this.toastr.success('Cadastro realizado com sucesso!');
 
           this.router.navigate(['/app/home']);
         },
         error: (err) => {
-          alert(err?.message);
+          this.toastr.error(err?.message);
         },
       });
     } else {
-      alert('Preencha os campos corretamente');
+      this.toastr.warning('Preencha os campos corretamente');
     }
   }
 }

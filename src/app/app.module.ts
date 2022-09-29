@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './provider/http.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { HttpInterceptorService } from './provider/http.interceptor';
     MatCheckboxModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

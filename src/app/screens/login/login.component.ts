@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   loginForm = this.fb.group({
@@ -27,15 +28,18 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.http.post<any>('auth/login', this.loginForm.value).subscribe({
         next: (res) => {
-          alert('Login realizado com sucesso!');
+          this.toastr.success('Login realizado com sucesso!');
+
           localStorage.setItem('token', res.access_token);
 
           this.router.navigate(['/app/home']);
         },
         error: (err) => {
-          alert('Usuario ou senha incorretos.');
+          this.toastr.error('Usuario ou senha incorretos.');
         },
       });
+    } else {
+      this.toastr.warning('Preencha os campos corretamente');
     }
   }
 }

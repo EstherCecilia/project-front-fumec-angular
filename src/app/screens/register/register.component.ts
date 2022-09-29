@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { map, Observable, startWith } from 'rxjs';
 
 type Position = {
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   control = new FormControl('');
   positions: Position[] = [
@@ -65,16 +67,16 @@ export class RegisterComponent implements OnInit {
         .post<any>('rota-de-criacao', this.registerForm.value)
         .subscribe({
           next: (res) => {
-            alert('Cadastro realizado com sucesso!');
+            this.toastr.success('Cadastro realizado com sucesso!');
 
             this.router.navigate(['/login']);
           },
           error: (err) => {
-            alert(err?.message);
+            this.toastr.error(err?.message);
           },
         });
     } else {
-      alert('Preencha os campos corretamente');
+      this.toastr.warning('Preencha os campos corretamente');
     }
   }
 }
