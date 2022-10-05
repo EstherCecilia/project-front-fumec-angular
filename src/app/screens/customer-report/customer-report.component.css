@@ -3,7 +3,7 @@ section {
   flex-direction: column;
   align-items: center;
   padding: 150px 50px;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: space-between;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../../assets/images/background-report.png");
@@ -30,15 +30,20 @@ button {
   margin: 30px 0;
 }
 
-.mat-checkbox-ripple .mat-ripple-element,
-.mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: red !important;
-}
-
 h1 {
   font-size: 3rem;
 }
 
 p {
   font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.fa-icon {
+  cursor: pointer;
+  color: #6c6b6b;
 }

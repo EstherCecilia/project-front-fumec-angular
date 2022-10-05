@@ -1,8 +1,8 @@
 section {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   align-items: center;
+  min-height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../../assets/images/background-home.jpeg");
   background-color: #cccccc;

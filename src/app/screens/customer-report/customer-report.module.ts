@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { BaseModule } from 'src/app/components/base/base.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [CustomerReportComponent],
@@ -14,6 +15,7 @@ import { BaseModule } from 'src/app/components/base/base.module';
     CommonModule,
     RouterModule,
     BaseModule,
+    FontAwesomeModule,
     MatTableModule,
     MatCheckboxModule,
     RouterModule.forChild([
