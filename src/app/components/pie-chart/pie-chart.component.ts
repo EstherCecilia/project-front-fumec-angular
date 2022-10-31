@@ -34,8 +34,15 @@ export class PieChartComponent implements OnInit {
           show: false,
         },
         data: [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
+          {
+            value: 1048,
+            name: 'Search Engine',
+          },
+          {
+            value: 735,
+            name: 'Direct',
+            itemStyle: { normal: { opacity: 0 } },
+          },
         ],
       },
     ],

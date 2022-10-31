@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 
+const FIRST_COLOR: string = '#335d9f';
+const SECOND_COLOR: string = '#7EA3D5';
+const THIRD_COLOR: string = '#b3d2f7';
+
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
@@ -12,20 +16,63 @@ export class BarChartComponent implements OnInit {
   option = {
     legend: {},
     tooltip: {},
-    dataset: {
-      source: [
-        ['product', '2015', '2016', '2017'],
-        ['Matcha Latte', 43.3, 85.8, 93.7],
-        ['Milk Tea', 83.1, 73.4, 55.1],
-        ['Cheese Cocoa', 86.4, 65.2, 82.5],
-        ['Walnut Brownie', 72.4, 53.9, 39.1],
-      ],
-    },
+    series: [
+      {
+        data: [
+          {
+            value: [120, 110],
+            itemStyle: { normal: { color: FIRST_COLOR } },
+          },
+          {
+            value: 200,
+            itemStyle: { normal: { color: FIRST_COLOR } },
+          },
+          {
+            value: 150,
+            itemStyle: { normal: { color: FIRST_COLOR } },
+          },
+        ],
+        type: 'bar',
+      },
+      {
+        data: [
+          {
+            value: [120, 110],
+            itemStyle: { normal: { color: SECOND_COLOR } },
+          },
+          {
+            value: 200,
+            itemStyle: { normal: { color: SECOND_COLOR } },
+          },
+          {
+            value: 150,
+            itemStyle: { normal: { color: SECOND_COLOR } },
+          },
+        ],
+        type: 'bar',
+      },
+      {
+        data: [
+          {
+            value: [120, 110],
+            itemStyle: { normal: { color: THIRD_COLOR } },
+          },
+          {
+            value: 200,
+            itemStyle: { normal: { color: THIRD_COLOR } },
+          },
+          {
+            value: 150,
+            itemStyle: { normal: { color: THIRD_COLOR } },
+          },
+        ],
+        type: 'bar',
+      },
+    ],
     xAxis: { type: 'category' },
     yAxis: {},
     // Declare several bar series, each will be mapped
     // to a column of dataset.source by default.
-    series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   };
 
   createChart() {

@@ -35,7 +35,7 @@ export class RadarChartComponent implements OnInit {
         axisLabel: {
           distance: 25,
           color: '#999',
-          fontSize: 20,
+          fontSize: 2,
         },
         anchor: {
           show: true,
@@ -47,11 +47,6 @@ export class RadarChartComponent implements OnInit {
         },
         title: {
           show: false,
-        },
-        detail: {
-          valueAnimation: true,
-          fontSize: 80,
-          offsetCenter: [0, '70%'],
         },
         data: [
           {
