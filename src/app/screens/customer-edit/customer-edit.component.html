@@ -1,0 +1,38 @@
+<app-base></app-base>
+<section>
+  <form [formGroup]="registerForm">
+    <div class="base">
+      <h1>Editar o cliente</h1>
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Nome</label>
+          <input formControlName="name" type="text" />
+        </div>
+        <div class="input-base">
+          <label for="">Telefone</label>
+          <input formControlName="phone" type="text" />
+        </div>
+      </div>
+
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Email</label>
+          <input formControlName="email" type="text" />
+        </div>
+        <div class="input-base">
+          <label for="">CEP</label>
+          <input formControlName="zipcode" type="text" />
+        </div>
+      </div>
+
+      <div class="group-input">
+        <div class="input-base">
+          <label for="">Número</label>
+          <input formControlName="number" type="text" />
+        </div>
+      </div>
+
+      <button (click)="register()">Salvar</button>
+    </div>
+  </form>
+</section>

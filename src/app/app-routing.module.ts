@@ -55,6 +55,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'customer-edit/:id',
+        loadChildren: () =>
+          import('./screens/customer-edit/customer-edit.module').then(
+            (m) => m.CustomerEditModule
+          ),
+      },
+      {
         path: 'courses-report',
         loadChildren: () =>
           import('./screens/courses-report/courses-report.module').then(

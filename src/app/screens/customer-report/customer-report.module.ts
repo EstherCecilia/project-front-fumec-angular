@@ -7,11 +7,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { BaseModule } from 'src/app/components/base/base.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [CustomerReportComponent],
   providers: [],
   imports: [
+    MatDialogModule,
     CommonModule,
     RouterModule,
     BaseModule,
