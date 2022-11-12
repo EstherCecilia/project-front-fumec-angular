@@ -139,3 +139,19 @@ body {
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: #295072 !important;
 }
+
+.spinner {
+  height: 50vh !important;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #295072 !important;
+}
+
+.mat-dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}

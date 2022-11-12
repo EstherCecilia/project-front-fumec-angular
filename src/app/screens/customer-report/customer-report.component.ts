@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -26,7 +26,7 @@ export interface ICutomer {
   styleUrls: ['./customer-report.component.css'],
 })
 export class CustomerReportComponent implements OnInit {
-  constructor(private readonly http: HttpClient, private dialog: MatDialog) {}
+  constructor(private readonly http: HttpClient, public dialog: MatDialog) {}
 
   displayedColumns: string[] = [
     'select',
@@ -42,17 +42,7 @@ export class CustomerReportComponent implements OnInit {
   faPen = faPen;
   faTrash = faTrash;
   selection = new SelectionModel<ICutomer>(true, []);
-
-  customer: ICutomer = {
-    position: 0,
-    id: '',
-    name: '',
-    phone: '',
-    email: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-  };
+  loading = true;
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -60,15 +50,10 @@ export class CustomerReportComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: this.customer,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.customer = result;
+  openDialog(id: string): void {
+    this.dialog.open(DialogAnimation, {
+      width: '40vw',
+      data: id,
     });
   }
 
@@ -91,6 +76,7 @@ export class CustomerReportComponent implements OnInit {
   }
 
   getCustomers() {
+    this.loading = true;
     this.http.get<any>('leads').subscribe({
       next: (res) => {
         this.dataSource = res.map((customer: ICutomer, index: number) => ({
@@ -101,6 +87,7 @@ export class CustomerReportComponent implements OnInit {
           state: customer.zipCode,
         }));
       },
+      complete: () => (this.loading = false),
     });
   }
 
@@ -110,19 +97,21 @@ export class CustomerReportComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog.component',
-  templateUrl: 'dialog.component.html',
-  styleUrls: ['./dialog.component.css'],
+  selector: 'dialog-animation.',
+  templateUrl: 'dialog-animation.html',
+  styleUrls: ['./dialog-animation.css'],
 })
-export class DialogOverviewExampleDialog implements OnInit {
+export class DialogAnimation {
   constructor(
-    private dialogRef: MatDialogRef<CustomerReportComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ICutomer
+    public dialogRef: MatDialogRef<DialogAnimation>,
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
-
-  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onDelete(id: string) {
+    console.log(id);
   }
 }

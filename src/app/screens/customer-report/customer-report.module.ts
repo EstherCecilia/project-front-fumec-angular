@@ -4,6 +4,7 @@ import { CustomerReportComponent } from './customer-report.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { BaseModule } from 'src/app/components/base/base.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -18,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BaseModule,
     FontAwesomeModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     MatCheckboxModule,
     RouterModule.forChild([
       {

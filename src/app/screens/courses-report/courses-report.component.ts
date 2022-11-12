@@ -1,5 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export interface ICourse {
@@ -103,6 +108,8 @@ const ELEMENT_DATA: ICourse[] = [
   styleUrls: ['./courses-report.component.css'],
 })
 export class CoursesReportComponent {
+  constructor(public dialog: MatDialog) {}
+
   displayedColumns: string[] = [
     'select',
     'name',
@@ -111,16 +118,25 @@ export class CoursesReportComponent {
     'description',
     'shift',
     'price',
+    'action',
   ];
   dataSource = ELEMENT_DATA;
   faPen = faPen;
   faTrash = faTrash;
   selection = new SelectionModel<ICourse>(true, []);
+  loading = false;
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.length;
     return numSelected === numRows;
+  }
+
+  openDialog(id: string): void {
+    this.dialog.open(DialogAnimation, {
+      width: '40vw',
+      data: id,
+    });
   }
 
   toggleAllRows() {
@@ -139,5 +155,25 @@ export class CoursesReportComponent {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.position + 1
     }`;
+  }
+}
+
+@Component({
+  selector: 'dialog-animation.',
+  templateUrl: 'dialog-animation.html',
+  styleUrls: ['./dialog-animation.css'],
+})
+export class DialogAnimation {
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimation>,
+    @Inject(MAT_DIALOG_DATA) public data: string
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onDelete(id: string) {
+    console.log(id);
   }
 }

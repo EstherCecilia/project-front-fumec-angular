@@ -40,10 +40,14 @@ p {
 
 .actions {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 
 .fa-icon {
   cursor: pointer;
   color: #6c6b6b;
+}
+
+.fa-icon:first-of-type {
+  margin-right: 8px;
 }

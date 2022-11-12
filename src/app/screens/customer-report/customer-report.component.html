@@ -3,7 +3,12 @@
   <h1>Relatório de clientes</h1>
   <p>ENTENDA SEU NEGÓCIO</p>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table
+    *ngIf="!loading"
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+  >
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
     <!-- Checkbox Column -->
@@ -78,7 +83,7 @@
           <fa-icon
             [icon]="faTrash"
             class="fa-icon"
-            (click)="openDialog()"
+            (click)="openDialog(element.id)"
           ></fa-icon>
         </div>
       </td>
@@ -87,5 +92,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <div class="footer-section"><button>Inativar</button></div>
+  <div class="footer-section" *ngIf="!loading"><button>Inativar</button></div>
+
+  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 </section>

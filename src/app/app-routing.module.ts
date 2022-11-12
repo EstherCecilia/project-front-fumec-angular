@@ -62,6 +62,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'course-edit/:id',
+        loadChildren: () =>
+          import('./screens/register-course/register-course.module').then(
+            (m) => m.RegisterCourseModule
+          ),
+      },
+      {
         path: 'courses-report',
         loadChildren: () =>
           import('./screens/courses-report/courses-report.module').then(
