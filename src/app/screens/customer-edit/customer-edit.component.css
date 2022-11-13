@@ -12,3 +12,9 @@ section {
 span {
   color: #ffff;
 }
+
+.group-input {
+  display: flex;
+  justify-content: space-between;
+  width: 105%;
+}

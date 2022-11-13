@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { CepService } from 'src/app/services/cep.service';
 
 type Course = {
   label: string;
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cepService: CepService
   ) {}
   control = new FormControl('');
   courses: Course[] = [];
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
     email: ['', Validators.required],
     phone: ['', Validators.required],
     zipCode: ['', Validators.required],
+    number: '',
   });
 
   getCourses() {
@@ -61,6 +64,13 @@ export class HomeComponent implements OnInit {
   }
 
   register() {
+    const address = this.cepService.getAddress(this.registerForm.value.zipCode);
+
+    if (!address) {
+      this.toastr.warning('Cep inválido!');
+      return;
+    }
+
     if (this.registerForm.valid && this.control.value) {
       const courseId = this.courses.find(
         (course) => course.label === this.control.value
@@ -68,6 +78,10 @@ export class HomeComponent implements OnInit {
 
       const payload = {
         ...this.registerForm.value,
+        neighborhood: address['bairro'],
+        city: address['localidade'],
+        state: address['uf'],
+        address: address['logradouro'],
         courseId,
       };
 
