@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CepService } from 'src/app/services/cep.service';
 @Component({
   selector: 'app-customer-edit',
   templateUrl: './customer-edit.component.html',
@@ -14,7 +15,8 @@ export class CustomerEditComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cepService: CepService
   ) {}
   registerForm = this.fb.group({
     name: ['', Validators.required],
@@ -33,6 +35,7 @@ export class CustomerEditComponent implements OnInit {
         this.registerForm.controls['phone'].setValue(res.phone);
         this.registerForm.controls['email'].setValue(res.email);
         this.registerForm.controls['zipcode'].setValue(res.zipcode);
+        this.registerForm.controls['number'].setValue(res.number);
       },
     });
   }
